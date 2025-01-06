@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import axios from "./axiosInstance";
 
 const CameraController = () => {
     const [cameraStatus, setCameraStatus] = useState(null); // 카메라 상태 저장
 
     const startCamera = async () => {
-        try {
-            const response = await fetch("/api/start-camera", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ cameraType: "front" }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setCameraStatus(data); // 서버의 응답을 상태로 저장
-            } else {
-                setCameraStatus("Failed to start camera");
+        const response = ((await axios.post("/PetCam/startCam", {cameraType: "front"}, {
+            headers: {
+                'Content-Type': 'application/json', // 본문 데이터 형식 지정
             }
+        })).data);
+
+        try {
+            // 응답 데이터에서 필요한 정보 추출
+            setCameraStatus(response.data.message || "Camera started successfully");
         } catch (error) {
             console.error("Error starting camera:", error);
             setCameraStatus("Error occurred while starting camera");
@@ -26,7 +21,7 @@ const CameraController = () => {
     };
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+        <div style={{padding: "20px", fontFamily: "Arial, sans-serif"}}>
             <h1>Camera Controller</h1>
             <button
                 onClick={startCamera}
@@ -41,9 +36,8 @@ const CameraController = () => {
             >
                 Start Camera
             </button>
-            <div style={{ marginTop: "20px" }}>
-                <strong>Status:</strong>{" "}
-                {cameraStatus ? cameraStatus : "No action taken yet"}
+            <div style={{marginTop: "20px"}}>
+                <strong>Status:</strong> {cameraStatus ? cameraStatus : "No action taken yet"}
             </div>
         </div>
     );
