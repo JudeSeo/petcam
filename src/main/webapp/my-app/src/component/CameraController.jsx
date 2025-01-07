@@ -5,11 +5,7 @@ const CameraController = () => {
     const [cameraStatus, setCameraStatus] = useState(null); // 카메라 상태 저장
 
     const startCamera = async () => {
-        const response = ((await axios.post("/PetCam/startCam", {cameraType: "front"}, {
-            headers: {
-                'Content-Type': 'application/json', // 본문 데이터 형식 지정
-            }
-        })).data);
+        const response = ((await axios.post("/PetCam/startCam", {cameraType: "front"})).data);
 
         try {
             // 응답 데이터에서 필요한 정보 추출

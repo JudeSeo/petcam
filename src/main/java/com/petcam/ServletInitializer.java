@@ -1,4 +1,4 @@
-package util;
+package com.petcam;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

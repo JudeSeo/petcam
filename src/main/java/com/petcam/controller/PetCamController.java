@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("PetCam")
+@RequestMapping("/PetCam")
 public class PetCamController {
 
     @RequestMapping(value = "/startCam", method = RequestMethod.POST)
