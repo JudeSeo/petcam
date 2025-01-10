@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "./axiosInstance";
+import SocketConnection from "./SocketConnection";
 
 const CameraController = () => {
     const [cameraStatus, setCameraStatus] = useState(""); // 카메라 상태 저장
@@ -24,6 +25,7 @@ const CameraController = () => {
     return (
         <div style={{padding: "20px", fontFamily: "Arial, sans-serif"}}>
             <h1>Camera Controller</h1>
+            <SocketConnection/>
             <input value={deviceId} onChange={e => setDeviceId(e.target.value)}/>
             <button
                 onClick={connectDevide}
